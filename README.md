@@ -1,4 +1,3 @@
-# State of this project
+# CLIban
 
-No stable master branch yet.  
-Development happens in the development branches.
+CLIban is the "Command Line Interface (Kan)ban" board.
