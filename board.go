@@ -62,8 +62,7 @@ func (b *Board) MoveCard(c *Card, direction string) error {
 						// Delete old *card pointer. This is complicated code, but avoids a memory leak.
 						// See: https://github.com/golang/go/wiki/SliceTricks
 						if cai < len(b.Columns[coi].Cards)-1 {
-							log.Printf("Entering copy commands")
-							copy(b.Columns[coi].Cards[:cai], b.Columns[coi].Cards[cai+1:])
+							copy(b.Columns[coi].Cards[cai:], b.Columns[coi].Cards[cai+1:])
 						}
 						b.Columns[coi].Cards[len(b.Columns[coi].Cards)-1] = nil
 						b.Columns[coi].Cards = b.Columns[coi].Cards[:len(b.Columns[coi].Cards)-1]
@@ -78,8 +77,7 @@ func (b *Board) MoveCard(c *Card, direction string) error {
 						// See: https://github.com/golang/go/wiki/SliceTricks
 						if cai < len(b.Columns[coi].Cards)-1 {
 							// FIXME: Somehow, this duplicates cards, at least visually(?):
-							log.Printf("Entering copy commands")
-							copy(b.Columns[coi].Cards[:cai], b.Columns[coi].Cards[cai+1:])
+							copy(b.Columns[coi].Cards[cai:], b.Columns[coi].Cards[cai+1:])
 						}
 						b.Columns[coi].Cards[len(b.Columns[coi].Cards)-1] = nil
 						b.Columns[coi].Cards = b.Columns[coi].Cards[:len(b.Columns[coi].Cards)-1]

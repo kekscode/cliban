@@ -21,6 +21,7 @@ func getSelectedCell(table *tview.Table) (r, c int) {
 
 // Render the data in a tview table
 func renderTableView(table *tview.Table, b *Board) {
+	table.Clear()
 	// rows
 	for r := 0; r <= b.GetLongestStackOfCards(); r++ { // TODO: Try if GetLongestStack... can be substituted by b.GetRowCount method
 		// columns
