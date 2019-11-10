@@ -162,9 +162,7 @@ func main() {
 				} else {
 					log.Printf("moving cursor")
 					if co != 0 {
-						destRowLen := len(b.Columns[co-1].Cards)
-						log.Printf("destRowLen: %v", destRowLen)
-						table.Select(destRowLen, co-1)
+						table.Select(ro-1, co)
 						log.Printf("done moving cursor")
 					}
 				}
