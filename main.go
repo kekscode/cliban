@@ -118,7 +118,8 @@ func main() {
 	table.SetTitle(b.Title)
 	table.SetBorders(true)
 	table.SetSelectable(true, true)
-	renderTableView(table, b)
+
+	renderTableView(table, b) // FIXME: Is that really needed here?
 
 	app.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
 		key := event.Key()
