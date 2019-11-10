@@ -121,8 +121,8 @@ func main() {
 	renderTableView(table, b)
 
 	app.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
-
 		key := event.Key()
+
 		if key == tcell.KeyESC {
 			app.Stop()
 		}
@@ -131,10 +131,10 @@ func main() {
 			app.Stop()
 		}
 
-		// D deletes the selected card
 		if key == tcell.KeyRune {
 			key = tcell.Key(event.Rune())
-			if key == 68 { // 68 == ascii("D")
+			switch key {
+			case 68:
 				ro, co := getSelectedCell(table)
 
 				// -1 because table head is ro[0]
@@ -142,7 +142,7 @@ func main() {
 				if err != nil {
 					log.Printf("Error: %v", err)
 				}
-			} else if key == 99 { // 99 == ascii("c")
+			case 99: // 99 == ascii("c")
 				_, co := getSelectedCell(table)
 
 				// -1 because table head is ro[0]
@@ -150,7 +150,7 @@ func main() {
 				if err != nil {
 					log.Printf("Error: %v", err)
 				}
-			} else if key == 72 { // 72 == ascii("H")
+			case 72: // 72 == ascii("H")
 				ro, co := getSelectedCell(table)
 				log.Printf("got cell: %v, %v", ro, co)
 
@@ -167,7 +167,7 @@ func main() {
 						log.Printf("done moving cursor")
 					}
 				}
-			} else if key == 76 { // 76 == ascii("L")
+			case 76: // 76 == ascii("L")
 				ro, co := getSelectedCell(table)
 
 				// -1 because table head is ro[0]
