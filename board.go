@@ -85,24 +85,26 @@ func (b *Board) MoveCard(c *Card, direction string) error {
 						return nil
 					}
 				case "up":
-					// Save card to move in new slice
-					cardToMove := []*Card{}
-					cardToMove = append(cardToMove, b.Columns[coi].Cards[cai])
+					if len(b.Columns[coi].Cards[:cai]) >= 1 {
+						// Save card to move in new slice
+						cardToMove := []*Card{}
+						cardToMove = append(cardToMove, b.Columns[coi].Cards[cai])
 
-					// Delete card to be moved from slice
-					if cai < len(b.Columns[coi].Cards)-1 {
-						copy(b.Columns[coi].Cards[cai:], b.Columns[coi].Cards[cai+1:])
+						// Delete card to be moved from slice
+						if cai < len(b.Columns[coi].Cards)-1 {
+							copy(b.Columns[coi].Cards[cai:], b.Columns[coi].Cards[cai+1:])
+						}
+						b.Columns[coi].Cards[len(b.Columns[coi].Cards)-1] = nil
+						b.Columns[coi].Cards = b.Columns[coi].Cards[:len(b.Columns[coi].Cards)-1]
+
+						log.Printf("Stack: %v", b.Columns[coi].Cards)
+						log.Printf("cardToMove: %v", cardToMove)
+
+						// Insert card ("move")
+						b.Columns[coi].Cards = append(b.Columns[coi].Cards[:cai-1], append(cardToMove, b.Columns[coi].Cards[cai-1:]...)...)
+						log.Printf("New Stack: %v", b.Columns[coi].Cards)
+						return nil
 					}
-					b.Columns[coi].Cards[len(b.Columns[coi].Cards)-1] = nil
-					b.Columns[coi].Cards = b.Columns[coi].Cards[:len(b.Columns[coi].Cards)-1]
-
-					log.Printf("Stack: %v", b.Columns[coi].Cards)
-					log.Printf("cardToMove: %v", cardToMove)
-
-					// Insert card ("move")
-					b.Columns[coi].Cards = append(b.Columns[coi].Cards[:cai-1], append(cardToMove, b.Columns[coi].Cards[cai-1:]...)...)
-					log.Printf("New Stack: %v", b.Columns[coi].Cards)
-					return nil
 				}
 			}
 		}
@@ -110,6 +112,7 @@ func (b *Board) MoveCard(c *Card, direction string) error {
 	msg := "Cound not move card"
 	log.Println(msg)
 	return errors.New(msg)
+
 }
 
 func (b *Board) AddCard(colid uuid.UUID, title, body string) (bool, error) {
