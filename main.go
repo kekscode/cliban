@@ -161,10 +161,8 @@ func main() {
 					log.Printf("Error: %v", err)
 				} else {
 					log.Printf("moving cursor")
-					if co != 0 {
-						table.Select(ro-1, co)
-						log.Printf("done moving cursor")
-					}
+					table.Select(ro-1, co)
+					log.Printf("done moving cursor")
 				}
 			case 74: // 74 == ascii("J")
 				ro, co := getSelectedCell(table)
@@ -176,10 +174,8 @@ func main() {
 					log.Printf("Error: %v", err)
 				} else {
 					log.Printf("moving cursor")
-					if co != 0 {
-						table.Select(ro+1, co)
-						log.Printf("done moving cursor")
-					}
+					table.Select(ro+1, co)
+					log.Printf("done moving cursor")
 				}
 			case 72: // 72 == ascii("H")
 				ro, co := getSelectedCell(table)
