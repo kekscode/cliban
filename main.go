@@ -118,6 +118,7 @@ func main() {
 	table.SetTitle(b.Title)
 	table.SetBorders(true)
 	table.SetSelectable(true, true)
+	renderTableView(table, b)
 
 	app.SetInputCapture(func(event *tcell.EventKey) *tcell.EventKey {
 
