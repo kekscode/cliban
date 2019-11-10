@@ -143,7 +143,7 @@ func main() {
 				if err != nil {
 					log.Printf("Error: %v", err)
 				}
-			case 99: // 99 == ascii("c")
+			case 111: // 111 == ascii("o")
 				_, co := getSelectedCell(table)
 
 				// -1 because table head is ro[0]
