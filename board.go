@@ -106,7 +106,7 @@ func (b *Board) MoveCard(c *Card, direction string) error {
 						return nil
 					}
 				case "down":
-					if len(b.Columns[coi].Cards[cai:]) >= 0 {
+					if len(b.Columns[coi].Cards[cai:]) >= 2 {
 						// Save card to move in new slice
 						cardToMove := []*Card{}
 						cardToMove = append(cardToMove, b.Columns[coi].Cards[cai])
