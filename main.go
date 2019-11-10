@@ -151,6 +151,23 @@ func main() {
 				if err != nil {
 					log.Printf("Error: %v", err)
 				}
+			case 75: // 75 == ascii("K")
+				ro, co := getSelectedCell(table)
+				log.Printf("got cell: %v, %v", ro, co)
+
+				// -1 because table head is ro[0]
+				err := b.MoveCard(b.Columns[co].Cards[ro-1], "up")
+				if err != nil {
+					log.Printf("Error: %v", err)
+				} else {
+					log.Printf("moving cursor")
+					if co != 0 {
+						destRowLen := len(b.Columns[co-1].Cards)
+						log.Printf("destRowLen: %v", destRowLen)
+						table.Select(destRowLen, co-1)
+						log.Printf("done moving cursor")
+					}
+				}
 			case 72: // 72 == ascii("H")
 				ro, co := getSelectedCell(table)
 				log.Printf("got cell: %v, %v", ro, co)
