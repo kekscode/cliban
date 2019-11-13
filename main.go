@@ -112,12 +112,27 @@ func main() {
 	b.AddCard(co5.ID, "Title 7", "Body 7")
 	b.AddCard(co5.ID, "Title 8", "Body 8")
 
+	// MAIN ui setup starts here
 	app := tview.NewApplication()
 
 	table := tview.NewTable()
 	table.SetTitle(b.Title)
 	table.SetBorders(true)
 	table.SetSelectable(true, true)
+
+	form := tview.NewForm().
+		//		AddDropDown("Title", []string{"Mr.", "Ms.", "Mrs.", "Dr.", "Prof."}, 0, nil).
+		//					//		AddCheckbox("Age 18+", false, nil).
+		//					//		AddButton("Save", nil).
+		//					//		AddPasswordField("Password", "", 10, '*', nil).
+		AddInputField("First name", "", 20, nil, nil).
+		//					AddInputField("Last name", "", 20, nil, nil).
+		AddButton("Done", func() {})
+	//				form.SetBorder(true).SetTitle(fmt.Sprintf("%v", b.Columns[co].Cards[ro].Title)).SetTitleAlign(tview.AlignLeft)
+
+	pages := tview.NewPages()
+	pages.AddPage("board", table, true, true)
+	pages.AddPage("editcard", form, true, false)
 
 	renderTableView(table, b) // Initially render table view
 
@@ -213,18 +228,7 @@ func main() {
 			case 99: // 99 == ascii("c")
 				ro, co := getSelectedCell(table)
 				log.Printf("Column: %v/ Row: %v", co, ro)
-				form := tview.NewForm().
-					//		AddDropDown("Title", []string{"Mr.", "Ms.", "Mrs.", "Dr.", "Prof."}, 0, nil).
-					//					//		AddCheckbox("Age 18+", false, nil).
-					//					//		AddButton("Save", nil).
-					//					//		AddPasswordField("Password", "", 10, '*', nil).
-					AddInputField("First name", "", 20, nil, nil).
-					//					AddInputField("Last name", "", 20, nil, nil).
-					AddButton("Done", func() {})
-				//				form.SetBorder(true).SetTitle(fmt.Sprintf("%v", b.Columns[co].Cards[ro].Title)).SetTitleAlign(tview.AlignLeft)
-				log.Printf("%v", form)
-				app.SetFocus(form)
-
+				pages.SwitchToPage("editcard")
 			}
 		}
 
@@ -249,7 +253,7 @@ func main() {
 		return event
 	})
 
-	if err := app.SetRoot(table, true).Run(); err != nil {
+	if err := app.SetRoot(pages, true).Run(); err != nil {
 		panic(err)
 	}
 }
