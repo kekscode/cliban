@@ -210,6 +210,13 @@ func main() {
 						log.Printf("done moving cursor")
 					}
 				}
+			case 99: // 99 == ascii("c")
+				ro, co := getSelectedCell(table)
+				err := b.DisplayCardBody(b.Columns[co].Cards[ro])
+				if err != nil {
+					log.Fatalf("Error: %v", err)
+				}
+
 			}
 		}
 

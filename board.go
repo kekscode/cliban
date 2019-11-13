@@ -36,7 +36,7 @@ func (b *Board) Save() error {
 	return nil
 }
 
-func (b *Board) Load() {}
+func (b *Board) Load() error { return nil }
 
 func (b *Board) GetLongestStackOfCards() int {
 	longest := 0
@@ -47,6 +47,10 @@ func (b *Board) GetLongestStackOfCards() int {
 
 	}
 	return longest
+}
+
+func (b *Board) DisplayCardBody(c *Card) error {
+	return nil
 }
 
 func (b *Board) MoveCard(c *Card, direction string) error {
