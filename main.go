@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -213,16 +212,19 @@ func main() {
 				}
 			case 99: // 99 == ascii("c")
 				ro, co := getSelectedCell(table)
+				log.Printf("Column: %v/ Row: %v", co, ro)
 				form := tview.NewForm().
 					//		AddDropDown("Title", []string{"Mr.", "Ms.", "Mrs.", "Dr.", "Prof."}, 0, nil).
-					//		AddCheckbox("Age 18+", false, nil).
-					//		AddButton("Save", nil).
-					//		AddPasswordField("Password", "", 10, '*', nil).
+					//					//		AddCheckbox("Age 18+", false, nil).
+					//					//		AddButton("Save", nil).
+					//					//		AddPasswordField("Password", "", 10, '*', nil).
 					AddInputField("First name", "", 20, nil, nil).
-					AddInputField("Last name", "", 20, nil, nil).
+					//					AddInputField("Last name", "", 20, nil, nil).
 					AddButton("Done", func() {})
-				form.SetBorder(true).SetTitle(fmt.Sprintf("%v", b.Columns[co].Cards[ro].Title)).SetTitleAlign(tview.AlignLeft)
+				//				form.SetBorder(true).SetTitle(fmt.Sprintf("%v", b.Columns[co].Cards[ro].Title)).SetTitleAlign(tview.AlignLeft)
+				log.Printf("%v", form)
 				app.SetFocus(form)
+
 			}
 		}
 
