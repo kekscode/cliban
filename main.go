@@ -115,10 +115,13 @@ func main() {
 	// MAIN ui setup starts here
 	app := tview.NewApplication()
 
+	pages := tview.NewPages()
+
 	table := tview.NewTable()
 	table.SetTitle(b.Title)
 	table.SetBorders(true)
 	table.SetSelectable(true, true)
+	pages.AddPage("board", table, true, true)
 
 	form := tview.NewForm().
 		//		AddDropDown("Title", []string{"Mr.", "Ms.", "Mrs.", "Dr.", "Prof."}, 0, nil).
@@ -127,11 +130,8 @@ func main() {
 		//					//		AddPasswordField("Password", "", 10, '*', nil).
 		AddInputField("First name", "", 20, nil, nil).
 		//					AddInputField("Last name", "", 20, nil, nil).
-		AddButton("Done", func() {})
+		AddButton("Done", func() { pages.SwitchToPage("board") })
 	//				form.SetBorder(true).SetTitle(fmt.Sprintf("%v", b.Columns[co].Cards[ro].Title)).SetTitleAlign(tview.AlignLeft)
-
-	pages := tview.NewPages()
-	pages.AddPage("board", table, true, true)
 	pages.AddPage("editcard", form, true, false)
 
 	renderTableView(table, b) // Initially render table view
