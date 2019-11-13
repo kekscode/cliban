@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"log"
 
-	"github.com/rivo/tview"
 	uuid "github.com/satori/go.uuid"
 )
 
@@ -48,13 +47,6 @@ func (b *Board) GetLongestStackOfCards() int {
 
 	}
 	return longest
-}
-
-func (b *Board) DisplayCardBody(c *Card) (*tview.Box, error) {
-	box := tview.NewBox().
-		SetBorder(true).
-		SetTitle(c.Title)
-	return box, nil
 }
 
 func (b *Board) MoveCard(c *Card, direction string) error {
