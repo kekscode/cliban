@@ -114,7 +114,7 @@ func main() {
 
 	app := tview.NewApplication()
 
-	table := tview.NewTable().SetBorders(true)
+	table := tview.NewTable()
 	table.SetTitle(b.Title)
 	table.SetBorders(true)
 	table.SetSelectable(true, true)
