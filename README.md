@@ -11,4 +11,5 @@ CLIban is the "Command Line Interface (Kan)ban" board.
 - [] Implement "c"hange card
 - [] Implement Web API for CRUD
 - [] Implement Add Column
+- [] Implement Change Column Name
 - [] Implement Move Column
